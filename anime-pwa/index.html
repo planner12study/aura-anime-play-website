@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>AnimeKurd – Watch Anime</title>
+  <meta name="description" content="Stream anime with subtitles. Fast, installable, works offline.">
+  <meta name="theme-color" content="#121212">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Speda Bold: put the font file at fonts/Speda-Bold.woff2 (see README) -->
+  <link rel="preload" href="fonts/Speda-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="./" class="logo" aria-label="Home">Anime<span>Kurd</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="./" data-nav="all" class="active">Home</a>
+      <a href="#latest" data-nav="latest">Latest</a>
+      <button type="button" id="openAdmin" class="nav-btn">Admin</button>
+    </nav>
+    <button type="button" id="installBtn" class="btn ghost" hidden>Install app</button>
+  </header>
+
+  <main>
+    <section class="search-wrap">
+      <input id="search" type="search" placeholder="Search anime title…" autocomplete="off" aria-label="Search anime">
+    </section>
+    <p id="count" class="count" aria-live="polite"></p>
+    <section id="grid" class="grid" aria-label="Anime list"></section>
+    <p id="empty" class="empty" hidden>No anime found. Try another title, or add one from Admin.</p>
+  </main>
+
+  <!-- Player modal -->
+  <div id="playerModal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="playerTitle">
+    <div class="modal-box wide">
+      <div class="modal-head">
+        <h2 id="playerTitle"></h2>
+        <div class="row">
+          <button type="button" id="fsBtn" class="btn ghost">Full screen</button>
+          <button type="button" class="btn ghost" data-close>Close</button>
+        </div>
+      </div>
+      <div id="playerStage" class="stage"></div>
+    </div>
+  </div>
+
+  <!-- Admin modal -->
+  <div id="adminModal" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2 id="adminTitle">Admin dashboard</h2>
+        <button type="button" class="btn ghost" data-close>Close</button>
+      </div>
+
+      <form id="animeForm" autocomplete="off">
+        <input type="hidden" id="f-id">
+        <label>Title <input id="f-title" required maxlength="120"></label>
+        <div class="two">
+          <label>Season <input id="f-season" type="number" min="1" value="1" required></label>
+          <label>Episode <input id="f-episode" type="number" min="1" value="1" required></label>
+        </div>
+        <label>Poster image URL <input id="f-poster" type="url" placeholder="https://…/poster.jpg"></label>
+        <label>Video URL (Vidmoly / YouTube / Drive embed or direct MP4)
+          <input id="f-video" type="url" required placeholder="https://vidmoly.to/embed-xxxx.html"></label>
+        <div class="row">
+          <button type="submit" class="btn" id="saveBtn">Add anime</button>
+          <button type="button" class="btn ghost" id="resetBtn">Clear form</button>
+        </div>
+      </form>
+
+      <h3>Saved entries</h3>
+      <ul id="adminList" class="admin-list"></ul>
+
+      <div class="row wrap">
+        <button type="button" class="btn ghost" id="exportBtn">Export JSON</button>
+        <label class="btn ghost file">Import JSON<input type="file" id="importFile" accept="application/json" hidden></label>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="js/app.js"></script>
+</body>
+</html>

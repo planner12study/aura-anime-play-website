@@ -1,0 +1,11 @@
+[
+  {
+    "id": "demo-1",
+    "title": "Sample Anime (demo video)",
+    "season": 1,
+    "episode": 1,
+    "poster": "",
+    "video": "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    "createdAt": 1760000000000
+  }
+]
